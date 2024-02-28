@@ -1,2 +1,18 @@
 version: "3"
 services:
+  api:
+    build: ./api
+    container_name: api
+    command: python api.py
+    restart: always
+    expose:
+      - 6000
+    ports:
+      - 6000:6000
+
+  etl:
+    build: ./etl
+    container_name: etl
+    command: python etl.py
+    depends_on:
+      - api
